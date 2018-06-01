@@ -6,143 +6,191 @@ from server import defs
 
 SERVER_URL = "http://localhost:2727"
 
+NOT_FOUND_RESPONSE = Route.Response(
+    status_code=defs.NOT_FOUND_RESPONSE_STATUS,
+    data=defs.NOT_FOUND_RESPONSE_DATA
+)
+
 
 A_ROOT_ROUTE = Route(
-    path="/things/a/",
-    method=defs.METHOD_GET,
-    response_status_code=httplib.OK,
-    response_data={
-        "name": "root-a",
-        "value": 1
-    }
+    request=Route.Request(
+        path="/things/a/",
+        method=defs.METHOD_GET
+    ),
+    response=Route.Response(
+        status_code=httplib.OK,
+        data={
+            "name": "root-a",
+            "value": 1
+        }
+    )
 )
 
 A_SUB_ROUTE = Route(
-    path="/things/a/that",
-    method=defs.METHOD_GET,
-    response_status_code=httplib.OK,
-    response_data={
-        "name": "sub-a",
-        "value": 1.1
-    }
+    request=Route.Request(
+        path="/things/a/that",
+        method=defs.METHOD_GET
+    ),
+    response=Route.Response(
+        status_code=httplib.OK,
+        data={
+            "name": "sub-a",
+            "value": 1.1
+        }
+    )
 )
 
 B_ROUTE = Route(
-    path="/things/b/",
-    method=defs.METHOD_GET,
-    response_status_code=httplib.OK,
-    response_data={
-        "name": "b",
-        "value": 2
-    }
+    request=Route.Request(
+        path="/things/b/",
+        method=defs.METHOD_GET
+    ),
+    response=Route.Response(
+        status_code=httplib.OK,
+        data={
+            "name": "b",
+            "value": 2
+        }
+    )
 )
 
 C_ROUTE = Route(
-    path="/things/c/",
-    method=defs.METHOD_GET,
-    response_status_code=httplib.OK,
-    response_data={
-        "name": "c",
-        "value": 3
-    }
+    request=Route.Request(
+        path="/things/c/",
+        method=defs.METHOD_GET
+    ),
+    response=Route.Response(
+        status_code=httplib.OK,
+        data={
+            "name": "c",
+            "value": 3
+        }
+    )
 )
 
 D_ROUTE = Route(
-    path="/things/d/",
-    method=defs.METHOD_GET,
-    response_status_code=httplib.OK,
-    response_data={
-        "name": "d",
-        "value": 4
-    }
+    request=Route.Request(
+        path="/things/d/",
+        method=defs.METHOD_GET
+    ),
+    response=Route.Response(
+        status_code=httplib.OK,
+        data={
+            "name": "d",
+            "value": 4
+        }
+    )
 )
 
 E_ROUTE = Route(
-    path="/things/e/",
-    method=defs.METHOD_GET,
-    response_status_code=httplib.OK,
-    response_data={
-        "name": "e",
-        "value": 5
-    }
+    request=Route.Request(
+        path="/things/e/",
+        method=defs.METHOD_GET
+    ),
+    response=Route.Response(
+        status_code=httplib.OK,
+        data={
+            "name": "e",
+            "value": 5
+        }
+    )
 )
 
 E_ROUTE_ANY_METHOD = Route(
-    path=E_ROUTE.path,
-    method=defs.ANY_METHOD,
-    response_status_code=httplib.ACCEPTED,
-    response_data={
-        "name": "e-any-method",
-        "value": 2.71
-    }
+    request=Route.Request(
+        path=E_ROUTE.request.path,
+        method=defs.ANY_METHOD
+    ),
+    response=Route.Response(
+        status_code=httplib.ACCEPTED,
+        data={
+            "name": "e-any-method",
+            "value": 2.71
+        }
+    )
 )
 
 ANY_ROUTE_PUT = Route(
-    path=defs.ANY_PATH,
-    method=defs.METHOD_PUT,
-    response_status_code=httplib.OK,
-    response_data={
-        "name": "any-route-put",
-        "value": -1
-    }
+    request=Route.Request(
+        path=defs.ANY_PATH,
+        method=defs.METHOD_PUT
+    ),
+    response=Route.Response(
+        status_code=httplib.OK,
+        data={
+            "name": "any-route-put",
+            "value": -1
+        }
+    )
 )
 
 ANY_ROUTE_ANY_METHOD = Route(
-    path=defs.ANY_PATH,
-    method=defs.ANY_METHOD,
-    response_status_code=httplib.NOT_IMPLEMENTED,
-    response_data={"not": "implemented"}
+    request=Route.Request(
+        path=defs.ANY_PATH,
+        method=defs.ANY_METHOD
+    ),
+    response=Route.Response(
+        status_code=httplib.NOT_IMPLEMENTED,
+        data={"not": "implemented"}
+    )
 )
 
 # The following routes will not be loaded to the server, and will only be used for testing the 'any'
 
 E_ROUTE_PUT_METHOD = Route(
-    path=E_ROUTE.path,
-    method=defs.METHOD_PUT,
-    response_status_code=E_ROUTE_ANY_METHOD.response_status_code,
-    response_data=E_ROUTE_ANY_METHOD.response_data
+    request=Route.Request(
+        path=E_ROUTE.request.path,
+        method=defs.METHOD_PUT,
+    ),
+    response=E_ROUTE_ANY_METHOD.response
 )
 
 E_ROUTE_PATCH_METHOD = Route(
-    path=E_ROUTE.path,
-    method=defs.METHOD_PATCH,
-    response_status_code=ANY_ROUTE_ANY_METHOD.response_status_code,
-    response_data=ANY_ROUTE_ANY_METHOD.response_data
+    request=Route.Request(
+        path=E_ROUTE.request.path,
+        method=defs.METHOD_PATCH
+    ),
+    response=ANY_ROUTE_ANY_METHOD.response
 )
 
 B_ROUTE_GET_METHOD = Route(
-    path=B_ROUTE.path,
-    method=defs.METHOD_GET,
-    response_status_code=ANY_ROUTE_ANY_METHOD.response_status_code,
-    response_data=ANY_ROUTE_ANY_METHOD.response_data
+    request=Route.Request(
+        path=B_ROUTE.request.path,
+        method=defs.METHOD_GET
+    ),
+    response=ANY_ROUTE_ANY_METHOD.response
 )
 
 B_ROUTE_PUT_METHOD = Route(
-    path=B_ROUTE.path,
-    method=defs.METHOD_PUT,
-    response_status_code=ANY_ROUTE_PUT.response_status_code,
-    response_data=ANY_ROUTE_PUT.response_data
+    request=Route.Request(
+        path=B_ROUTE.request.path,
+        method=defs.METHOD_PUT,
+    ),
+    response=ANY_ROUTE_PUT.response
 )
 
 B_ROUTE_PATCH_METHOD = Route(
-    path=B_ROUTE.path,
-    method=defs.METHOD_PATCH,
-    response_status_code=ANY_ROUTE_ANY_METHOD.response_status_code,
-    response_data=ANY_ROUTE_ANY_METHOD.response_data
+    request=Route.Request(
+        path=B_ROUTE.request.path,
+        method=defs.METHOD_PATCH,
+    ),
+    response=ANY_ROUTE_ANY_METHOD.response
 )
 
 F_ROUTE_PUT_METHOD = Route(
-    path="/things/f/",
-    method=defs.METHOD_PUT,
-    response_status_code=ANY_ROUTE_PUT.response_status_code,
-    response_data=ANY_ROUTE_PUT.response_data
+    request=Route.Request(
+        path="/things/f/",
+        method=defs.METHOD_PUT,
+    ),
+    response=ANY_ROUTE_PUT.response
 )
 
 F_ROUTE_PATCH_METHOD = Route(
-    path="/things/f/",
-    method=defs.METHOD_PATCH,
-    response_status_code=ANY_ROUTE_ANY_METHOD.response_status_code,
-    response_data=ANY_ROUTE_ANY_METHOD.response_data
+    request=Route.Request(
+        path="/things/f/",
+        method=defs.METHOD_PATCH,
+    ),
+    response=ANY_ROUTE_ANY_METHOD.response
 )
 
 
@@ -177,18 +225,15 @@ class TestMockServer(object):
 
     @staticmethod
     def _validate_route(route, expect_presence):
-        response = requests.request(method=route.method,
-                                    url="%s%s" % (SERVER_URL, route.path))
+        response = requests.request(method=route.request.method,
+                                    url="%s%s" % (SERVER_URL, route.request.path))
 
         if expect_presence:
-            expected_status_code = route.response_status_code
-            expected_response_data = route.response_data
+            expected_response = route.response
         else:
-            expected_status_code = httplib.NOT_FOUND
-            expected_response_data = defs.NOT_FOUND_RESPONSE
+            expected_response = NOT_FOUND_RESPONSE
 
-        assert response.status_code == expected_status_code
-        assert response.json() == expected_response_data
+        assert expected_response.check_match(response)
 
     def _test_abc(self):
         self._set_routes(ABC_ROUTES)

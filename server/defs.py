@@ -1,6 +1,9 @@
+import httplib
+
 ANY_PATH = "*"
 ANY_METHOD = "*"
-NOT_FOUND_RESPONSE = {"error": "not found"}
+NOT_FOUND_RESPONSE_DATA = {"error": "not found"}
+NOT_FOUND_RESPONSE_STATUS = httplib.NOT_FOUND
 
 METHOD_GET = "GET"
 METHOD_POST = "POST"

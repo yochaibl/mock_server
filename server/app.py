@@ -65,8 +65,8 @@ def _find_match(path, method):
             pass
 
     return {
-        RESPONSE_DATA_KEY: defs.NOT_FOUND_RESPONSE,
-        RESPONSE_STATUS_CODE_KEY: httplib.NOT_FOUND
+        RESPONSE_DATA_KEY: defs.NOT_FOUND_RESPONSE_DATA,
+        RESPONSE_STATUS_CODE_KEY: defs.NOT_FOUND_RESPONSE_STATUS
     }
 
 
