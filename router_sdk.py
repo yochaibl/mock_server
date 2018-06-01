@@ -8,9 +8,6 @@ class RouterConfigException(Exception):
 
 
 class Route(object):
-    ANY_PATH = "*"
-    ANY_METHOD = "*"
-
     def __init__(self, path, method, response_status_code, response_data):
         self.path = path
         self.method = method
