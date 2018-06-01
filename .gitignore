@@ -1,0 +1,11 @@
+# pycharm
+.idea
+
+# pytest
+.cache
+
+# python
+*.pyc
+
+# venv
+.mock_server
